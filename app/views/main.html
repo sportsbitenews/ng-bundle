@@ -1,0 +1,81 @@
+<div class="header">
+  <h3 class="text-muted">GenericBundle</h3>
+</div>
+
+<div class="row items">
+  <div class="col-xs-12 col-sm-4 item" ng-repeat="i in items track by i.id"
+       ng-class="{'bg-success': eligible(i), 'bg-danger': !eligible(i)}">
+    <img src="http://placehold.it/168x256" alt="This is a item!">
+    <h3>
+      <span ng-class="{'text-strike': !eligible(i)}">{{ i.name }}</span>
+      <span class="text-danger fa fa-fw fa-lock"
+        ng-show="!eligible(i)"></span>
+      <span class="text-success fa fa-fw fa-unlock"
+        ng-show="eligible(i) && i.locked"></span>
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-xs-12">
+
+      <div class="col-xs-9">
+        <h3>Pay what you want! <small>Beat the average for extras!</small></h3>
+      </div>
+
+      <div class="col-xs-3">
+        <h3 class="text-center">
+          <small>Avg: </small>
+          <span class="text-warning">{{ price.value | currency }}</span>
+          <span class="text-danger fa fa-fw fa-lock"
+            ng-show="!beatAvg()"></span>
+          <span class="text-success fa fa-fw fa-unlock"
+            ng-show="beatAvg()"></span>
+        </h3>
+      </div>
+
+      <div class="col-xs-12">
+        <form class="form-horizontal" role="form" name="purchaseForm">
+
+          <div class="form-group price"
+            ng-class="{'has-error': purchaseForm.purchase.$invalid}">
+            <label class="control-label col-sm-3">My price (USD)</label>
+            <div class="col-sm-9">
+              <input class="form-control text-center"
+                type="text" name="purchase"
+                ng-model="price.purchase" ng-change="price.changed = true;"
+                required>
+            </div>
+          </div>
+
+          <div class="form-group email"
+            ng-class="{'has-error': purchaseForm.email.$invalid && purchaseForm.email.$dirty}">
+            <label class="control-label col-sm-3">Email</label>
+            <div class="col-sm-9">
+              <input class="form-control text-center"
+                type="email" name="email" placeholder="Email"
+                ng-model="user.email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button class="btn btn-success btn-block" id="form-login-submit"
+                type="submit" ng-disabled="!purchaseForm.$valid">
+                <span>Give me my items!</span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <hr>
+  </div>
+</div>

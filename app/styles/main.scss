@@ -1,0 +1,63 @@
+// Set font paths for Bootstrap & FontAwesome
+$fa-font-path: "/fonts/fontawesome";
+$icon-font-path: "/fonts/bootstrap/";
+
+// Manually import font-awesome sass
+@import '../bower_components/components-font-awesome/scss/font-awesome.scss';
+
+// bower:scss
+@import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Space out body */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Custom page header */
+.header {
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+  // side spacing for mobile first views
+  padding-left: 15px;
+  padding-right: 15px;
+
+  // Separate from content
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 35px;
+}
+
+.text-strike {
+  text-decoration: line-through;
+}
+
+.items {
+  margin-bottom: 35px;
+}
+
+.item {
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h3 {
+    text-align: center;
+  }
+
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
