@@ -9,9 +9,7 @@
       <h3>
         <span ng-class="{'text-strike': !eligible(i)}">{{ i.name }}</span>
         <span class="text-danger fa fa-fw fa-lock"
-          ng-show="!eligible(i)"></span>
-        <span class="text-success fa fa-fw fa-unlock"
-          ng-show="eligible(i) && i.locked"></span>
+          ng-show="!eligible(i.id)"></span>
       </h3>
     </div>
 </div>
