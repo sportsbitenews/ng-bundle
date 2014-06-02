@@ -2,6 +2,11 @@
 
 angular.module('ngBundleApp')
   .factory 'Price', ->
+    checkout =
+      average: undefined
+      purchase: undefined
+      timestamp: undefined
+
     randomCents = ->
       Math.floor(Math.random() * 100)
 
@@ -21,9 +26,16 @@ angular.module('ngBundleApp')
     # Public API here
     {
       normalize: (value) -> normalizeCurrency(value)
+
+      # TODO: unit test
+      getCheckout: -> checkout
+      # TODO: unit test
+      setCheckout: (purchasePrice, avgPrice) ->
+        checkout.average = avgPrice
+        checkout.purchase = purchasePrice
+        checkout.timestamp = Date()
+
       fetch: ->
-        {
-          value: generate(5)
-          updated: Date()
-        }
+        average: generate(5)
+        updated: Date()
     }

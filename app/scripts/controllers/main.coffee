@@ -1,7 +1,8 @@
 'use strict'
 
 angular.module('ngBundleApp')
-  .controller 'MainCtrl', ($scope, $interval, Item, Price, Split) ->
+  .controller 'MainCtrl', ($scope, $interval, $location,
+                           Item, Price, Split, User) ->
     # Use scope.private for enabling unit tests to access private functions
     $scope.private = {}
 
@@ -15,14 +16,14 @@ angular.module('ngBundleApp')
     ###
     # Initialize
     $scope.price = Price.fetch()
-    $scope.price.purchase = $scope.price.value
+    $scope.price.purchase = $scope.price.average
     $scope.price.changed = false
 
     # Update at an interval
     updatePrice = $scope.private.updatePrice = ->
       _.extend($scope.price, Price.fetch())
       if !$scope.price.changed
-        $scope.price.purchase = $scope.price.value
+        $scope.price.purchase = $scope.price.average
 
     priceUpdateRate = 2000
     intervalId = $interval(updatePrice, priceUpdateRate)
@@ -35,14 +36,13 @@ angular.module('ngBundleApp')
     ###
     Determine eligibilty for locked items
     ###
-    $scope.beatAvg = -> $scope.price.purchase > $scope.price.value
+    $scope.beatAvg = -> $scope.price.purchase > $scope.price.average
     $scope.eligible = (item) -> !item.locked or $scope.beatAvg()
 
     ###
     User data
     ###
-    $scope.user =
-      email: undefined
+    $scope.user = {email: User.email()}
 
     ###
     Split data
@@ -68,3 +68,18 @@ angular.module('ngBundleApp')
         if oldE and newE and oldE.rating != newE.rating
           console.log "#{newE.name}: #{oldE.rating} -> #{newE.rating}"
           Split.propagateChange(newE.id)
+
+    ###
+    Submission to checkout
+    ###
+    $scope.checkout = ->
+      User.setEmail($scope.user.email)
+      Price.setCheckout($scope.price.purchase, $scope.price.average)
+      Split.setSplits($scope.splits)
+
+      clonedItems = _.clone($scope.items)
+      for item in clonedItems
+        if $scope.eligible(item) then item.locked = false
+      Item.unlock((i.id for i in clonedItems when !i.locked))
+
+      $location.path 'checkout'

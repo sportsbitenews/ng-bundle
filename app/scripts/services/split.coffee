@@ -5,7 +5,7 @@ angular.module('ngBundleApp')
     splits = [
       {id: 0, name: 'Charity', rating: 3, locked: true, hover: undefined},
       {id: 1, name: 'Developers', rating: 6, locked: true, hover: undefined},
-      {id: 2, name: 'Humble Tip', rating: 1, locked: true, hover: undefined}
+      {id: 2, name: 'Site tip', rating: 1, locked: true, hover: undefined}
     ]
 
     lowerBound = (val, bound) -> if val >= bound then val else bound
@@ -31,11 +31,14 @@ angular.module('ngBundleApp')
 
     # Public API here
     {
-      list: ->
-        splits
+      list: -> splits
+      propagateChange: (sourceId) -> balanceRatings(sourceId)
 
-      propagateChange: (sourceId) ->
-        balanceRatings(sourceId)
+      # TODO: unit test, data validation
+      setSplits: (newSplits) ->
+        splits = newSplits
+        for split in splits
+          split.locked = true
 
       # For unit testing
       ratings: -> ratings()

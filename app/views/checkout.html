@@ -1,0 +1,71 @@
+<div class="header">
+  <h3 class="text-muted">GenericBundle</h3>
+</div>
+
+<div class="row items">
+    <div class="col-xs-4 item" ng-repeat="i in items track by i.id"
+       ng-class="{'bg-success': eligible(i.id), 'bg-danger': !eligible(i.id)}">
+      <img src="/images/168x256.gif" alt="This is a item!">
+      <h3>
+        <span ng-class="{'text-strike': !eligible(i)}">{{ i.name }}</span>
+        <span class="text-danger fa fa-fw fa-lock"
+          ng-show="!eligible(i)"></span>
+        <span class="text-success fa fa-fw fa-unlock"
+          ng-show="eligible(i) && i.locked"></span>
+      </h3>
+    </div>
+</div>
+
+<div class="row processor">
+  <div class="col-xs-12">
+    <h2>Thanks, {{email}}!</h2>
+    <h3>
+      You chose to pay
+      <span class="text-success">{{ checkout.purchase | currency }}</span> and
+      the average was
+      <span class="text-success">{{ checkout.average | currency }}.</span>
+      <span ng-show="checkout.purchase > checkout.average">
+        You <span class="text-success">beat the average!</span>
+      </span>
+      Your split:
+    </h3>
+
+    <progress>
+      <bar ng-repeat="split in splits" value="split.rating * 10">
+        <b>{{ split.name }}</b>: {{ split.rating * 10 }}%
+      </bar>
+    </progress>
+
+    <br><br>
+  </div>
+
+  <div class="col-xs-12 text-center">
+    <h2>Choose your payment method!</h2>
+    <br>
+  </div>
+
+  <div class="col-xs-3">
+    <button class="btn btn-primary">
+      Pay with card <i class="fa fa-credit-card"></i>
+    </button>
+  </div>
+  <div class="col-xs-3">
+    <button class="btn btn-info">
+      Pay with Paypal
+    </button>
+  </div>
+  <div class="col-xs-3">
+    <button class="btn btn-warning">
+      Pay with Amazon
+    </button>
+  </div>
+  <div class="col-xs-3">
+    <button class="btn btn-default">
+      Pay with Google
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <hr>
+</div>
