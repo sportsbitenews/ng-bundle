@@ -7,7 +7,7 @@
        ng-class="{'bg-success': eligible(i.id), 'bg-danger': !eligible(i.id)}">
       <img src="/images/168x256.gif" alt="This is a item!">
       <h3>
-        <span ng-class="{'text-strike': !eligible(i)}">{{ i.name }}</span>
+        <span ng-class="{'text-strike': !eligible(i.id)}">{{ i.name }}</span>
         <span class="text-danger fa fa-fw fa-lock"
           ng-show="!eligible(i.id)"></span>
       </h3>
@@ -21,18 +21,20 @@
       You chose to pay
       <span class="text-success">{{ checkout.purchase | currency }}</span> and
       the average was
-      <span class="text-success">{{ checkout.average | currency }}.</span>
+      <span class="text-success">{{ checkout.average | currency }}</span>.
       <span ng-show="checkout.purchase > checkout.average">
         You <span class="text-success">beat the average!</span>
       </span>
-      Your split:
+      Your split was
+      <span ng-repeat="s in splits">
+        <span ng-show="!$last">
+          {{s.rating * 10}}% ({{s.name}}),
+        </span>
+        <span ng-show="$last">
+          and {{s.rating * 10}}% ({{s.name}}).
+        </span>
+      </span>
     </h3>
-
-    <progress>
-      <bar ng-repeat="split in splits" value="split.rating * 10">
-        <b>{{ split.name }}</b>: {{ split.rating * 10 }}%
-      </bar>
-    </progress>
 
     <br><br>
   </div>
