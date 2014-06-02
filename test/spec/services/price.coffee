@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Service: Price', ->
+describe 'Factory: Price', ->
   # initialize namespace
   Price = {}
 

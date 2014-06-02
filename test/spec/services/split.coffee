@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Service: Split', ->
+describe 'Factory: Split', ->
 
   # load the service's module
   beforeEach module 'ngBundleApp'

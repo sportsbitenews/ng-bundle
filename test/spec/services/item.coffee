@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Service: Item', ->
+describe 'Factory: Item', ->
   # initialize namespace
   Item = {}
 
