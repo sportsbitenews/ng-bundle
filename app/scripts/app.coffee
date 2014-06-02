@@ -3,7 +3,8 @@
 angular
   .module('ngBundleApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ui.bootstrap'
   ])
   .config ($routeProvider) ->
     $routeProvider
@@ -12,4 +13,3 @@ angular
         controller: 'MainCtrl'
       .otherwise
         redirectTo: '/'
-
