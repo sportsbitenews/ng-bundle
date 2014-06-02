@@ -17,13 +17,13 @@ describe 'Controller: MainCtrl', ->
       scope.private.cancelUpdate()
 
   it 'should update the purchase price if the user has not yet altered it', ->
-    expect(scope.price.value).toBe scope.price.purchase
+    expect(scope.price.average).toBe scope.price.purchase
     scope.private.updatePrice()
-    expect(scope.price.value).toBe scope.price.purchase
+    expect(scope.price.average).toBe scope.price.purchase
 
   it 'should not update the purchase price if the user has altered it', ->
     # Ensure previous test holds initially
-    expect(scope.price.value).toBe scope.price.purchase
+    expect(scope.price.average).toBe scope.price.purchase
     scope.price.changed = true
 
     # Count how often the average value and the purchase values are the same
@@ -31,7 +31,7 @@ describe 'Controller: MainCtrl', ->
 
     for [0..100]
       scope.private.updatePrice()
-      if scope.price.value == scope.price.purchase then sameTally++
+      if scope.price.average == scope.price.purchase then sameTally++
 
     # Generated prices are more likely to be different than the same
     expect(sameTally).toBeLessThan(100-sameTally)
@@ -43,10 +43,10 @@ describe 'Controller: MainCtrl', ->
   it 'should mark an item as eligible if the average has been beat', ->
     item = {locked: true}
     scope.price.purchase = 6
-    scope.price.value = 5
+    scope.price.average = 5
     expect(scope.eligible(item)).toBeTruthy()
     scope.price.purchase = 4
-    scope.price.value = 5
+    scope.price.average = 5
     expect(scope.eligible(item)).toBeFalsy()
 
   it "should update unlocked split's hover values", ->

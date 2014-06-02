@@ -27,6 +27,6 @@ describe 'Factory: Price', ->
 
   it 'should generate a randomized value between 5 and 6', ->
     for [0..10000]
-      value = Price.fetch().value
+      value = Price.fetch().average
       expect(value >= 5).toBeTruthy()
       expect(value <= 6).toBeTruthy()
