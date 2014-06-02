@@ -5,7 +5,7 @@
 <div class="row items">
   <div class="col-xs-12 col-sm-4 item" ng-repeat="i in items track by i.id"
        ng-class="{'bg-success': eligible(i), 'bg-danger': !eligible(i)}">
-    <img src="http://placehold.it/168x256" alt="This is a item!">
+    <img src="/images/168x256.gif" alt="This is a item!">
     <h3>
       <span ng-class="{'text-strike': !eligible(i)}">{{ i.name }}</span>
       <span class="text-danger fa fa-fw fa-lock"
