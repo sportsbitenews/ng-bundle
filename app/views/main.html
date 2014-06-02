@@ -59,6 +59,32 @@
             </div>
           </div>
 
+          <div class="form-group split">
+            <div class="col-xs-4 text-center"
+              ng-repeat="split in splits">
+              <h4>{{ split.name }}:
+                <span class="label label-success" ng-if="!split.hover">
+                  {{ percentile(split.rating) }}%
+                </span>
+                <span class="label label-info" ng-if="split.hover">
+                  {{ percentile(split.hover) }}%
+                </span>
+              </h4>
+              <rating ng-model="split.rating" max="10" readonly="split.locked"
+                on-hover="updateHover($index, value)"
+                on-leave="split.hover=undefined">
+              </rating>
+              <button class="btn btn-block" type="button"
+                ng-class="{'btn-danger': !split.locked,
+                           'btn-default': split.locked}"
+                ng-click="split.locked=!split.locked">
+                <span ng-show="!split.locked">Lock</span>
+                <span ng-show="split.locked">Locked</span>
+              </button>
+
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-12">
               <button class="btn btn-success btn-block" id="form-login-submit"
